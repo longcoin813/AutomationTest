@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="TestSuite" verbose="1">
+    <test name="cases">
+        <classes>
+            <class name="com.java.LoadBrowser"></class>
+            <class name="com.java.demo"></class>
+            <class name="com.java.TestLogin"></class>
+            <class name="com.java.TestUser"></class>
+
+        </classes>
+    </test>
+</suite>
