@@ -28,9 +28,9 @@ public class TestLogin {
         try {
             System.out.println("4");
             driver.navigate().to("http://localhost:8080/signin");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("admin");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("123");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/button")).click();
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("admin");
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("123");
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/button")).click();
             Thread.sleep(1000);
 
             if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
@@ -62,7 +62,7 @@ public class TestLogin {
                 .setId("Login_Test_2")
                 .setAction("Truy cập vào trang login và nhập 1 user không có trong database \n" +
                         "Username: test \n" +
-                        "Password: 123")
+                        "Password: 123456789")
                 .setExpectedResult("Login không thành công và ở lại trang login")
                 .setActualResult("Login không thành công")
                 .setStatus(true)
@@ -70,9 +70,9 @@ public class TestLogin {
                 .setDate("07/08/2021");
         try {
             driver.navigate().to("http://localhost:8080/signin");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("test");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("123");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/button")).click();
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("test");
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("123456789");
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/button")).click();
             Thread.sleep(2000);
 
             if (!driver.getCurrentUrl().equals("http://localhost:8080/signin")) {
@@ -108,9 +108,9 @@ public class TestLogin {
                 .setDate("07/08/2021");
         try {
             driver.navigate().to("http://localhost:8080/signin");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("admin");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("");
-            driver.findElement(By.xpath("/html/body/div/div/main/section/div/div[1]/div[1]/div/form/button")).click();
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("admin");
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("");
+            driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/button")).click();
             Thread.sleep(2000);
 
             if (!driver.getCurrentUrl().equals("http://localhost:8080/signin")) {

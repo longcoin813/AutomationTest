@@ -4,25 +4,26 @@ import helper.ExcelWriter;
 import model.Response;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+
 import static com.java.LoadBrowser.driver;
 
-public class TestUser {
-
+public class TestStaff {
     @Test(priority = 1)
     public void testInsert() {
 
-        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
-            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[1]/a")).click();
+        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/staff")) {
+            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[2]/a")).click();
         } else {
             driver.navigate().refresh();
         }
         Response response = new Response()
-                .setName("Test User")
+                .setName("Test Staff")
                 .setTestType("FUNC")
                 .setPriority("High")
-                .setId("User_Insert_Test_1")
-                .setAction("Truy cập vào trang người dùng\n")
+                .setId("Staff_Insert_Test_1")
+                .setAction("Truy cập vào trang nhân viên\n Bấm thêm nhân viên \n Điền tất cả thông tin")
                 .setExpectedResult("Thêm thành công")
                 .setActualResult("Thêm thành công")
                 .setStatus(true)
@@ -36,11 +37,19 @@ public class TestUser {
         try {
             driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/button")).click();
             Thread.sleep(500);
-            driver.findElement(By.xpath("//*[@id=\"fullName\"]")).sendKeys("Hoàng Long");
-            driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("hLong");
-            driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("123456789");
+            driver.findElement(By.xpath("//*[@id=\"staffid\"]")).sendKeys("010");
+            driver.findElement(By.xpath("//*[@id=\"staffname\"]")).sendKeys("Long");
+            driver.findElement(By.xpath("//*[@id=\"radio1\"]")).sendKeys("true");
+            driver.findElement(By.xpath("//*[@id=\"radio2\"]")).click();
+            driver.findElement(By.xpath("//*[@id=\"birthday\"]")).sendKeys("2000-02-01");
+            driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("longdev813@gmail.com");
+            driver.findElement(By.xpath("//*[@id=\"phone\"]")).sendKeys("123456789");
+            driver.findElement(By.xpath("//*[@id=\"salary\"]")).sendKeys("10000000");
+            driver.findElement(By.xpath("//*[@id=\"notes\"]")).sendKeys("note");
+            driver.findElement(By.xpath("//*[@id=\"departsByDepartid\"]")).sendKeys("IT");
+
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[@id=\"form\"]/div[4]/button[2]")).click();
+            driver.findElement(By.xpath("//*[@id=\"form\"]/div[10]/button[2]")).click();
             Thread.sleep(1000);
             if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm không thành công")) {
                 response.setActualResult("Thêm không thành công").setStatus(false);
@@ -58,10 +67,10 @@ public class TestUser {
         Assert.assertTrue(true);
     }
     @Test(priority = 2)
-    public void testInsertWithNotFullname() {
+    public void testInsertWithNotSalary() {
 
-        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
-            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[1]/a")).click();
+        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/staff")) {
+            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[2]/a")).click();
         } else {
             driver.navigate().refresh();
         }
@@ -69,8 +78,8 @@ public class TestUser {
                 .setName("Test User")
                 .setTestType("FUNC")
                 .setPriority("High")
-                .setId("User_Insert_Test_2")
-                .setAction("Truy cập vào trang người dùng\n không điền Fullname")
+                .setId("Staff_Insert_Test_2")
+                .setAction("Truy cập vào trang người dùng\n Bấm thêm nhân viên \n không điền Salyry")
                 .setExpectedResult("Thêm không thành công")
                 .setActualResult("Thêm không thành công")
                 .setStatus(true)
@@ -84,11 +93,19 @@ public class TestUser {
         try {
             driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/button")).click();
             Thread.sleep(500);
-            driver.findElement(By.xpath("//*[@id=\"fullName\"]")).sendKeys("");
-            driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("test");
-            driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("123456789");
+            driver.findElement(By.xpath("//*[@id=\"staffid\"]")).sendKeys("011");
+            driver.findElement(By.xpath("//*[@id=\"staffname\"]")).sendKeys("Long");
+            driver.findElement(By.xpath("//*[@id=\"radio1\"]")).sendKeys("true");
+            driver.findElement(By.xpath("//*[@id=\"radio2\"]")).click();
+            driver.findElement(By.xpath("//*[@id=\"birthday\"]")).sendKeys("2000-02-01");
+            driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("longdev813@gmail.com");
+            driver.findElement(By.xpath("//*[@id=\"phone\"]")).sendKeys("123456789");
+            driver.findElement(By.xpath("//*[@id=\"salary\"]")).sendKeys("");
+            driver.findElement(By.xpath("//*[@id=\"notes\"]")).sendKeys("note");
+            driver.findElement(By.xpath("//*[@id=\"departsByDepartid\"]")).sendKeys("IT");
+
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[@id=\"form\"]/div[4]/button[2]")).click();
+            driver.findElement(By.xpath("//*[@id=\"form\"]/div[10]/button[2]")).click();
             Thread.sleep(1000);
             if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm thành công")) {
                 response.setActualResult("Thêm thành công").setStatus(false);
@@ -106,10 +123,10 @@ public class TestUser {
         Assert.assertTrue(true);
     }
     @Test(priority = 3)
-    public void testInsertWithExitsUser() {
+    public void testInsertWithExitsStaff() {
 
-        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
-            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[1]/a")).click();
+        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/staff")) {
+            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[2]/a")).click();
         } else {
             driver.navigate().refresh();
         }
@@ -117,9 +134,9 @@ public class TestUser {
                 .setName("Test User")
                 .setTestType("FUNC")
                 .setPriority("High")
-                .setId("User_Insert_Test_3")
-                .setAction("Truy cập vào trang người dùng\n Nhấn nút thêm người dùng \n" +
-                        "Thêm người dùng đã có trong database")
+                .setId("Staff_Insert_Test_3")
+                .setAction("Truy cập vào trang người dùng\n Nhấn nút thêm nhân viên\n" +
+                        "Thêm nhân viên đã có trong database")
                 .setExpectedResult("Thêm không thành công")
                 .setActualResult("Thêm không thành công")
                 .setStatus(true)
@@ -133,13 +150,21 @@ public class TestUser {
         try {
             driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/button")).click();
             Thread.sleep(500);
-            driver.findElement(By.xpath("//*[@id=\"fullName\"]")).sendKeys("admin");
-            driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("admin");
-            driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("123456789");
+            driver.findElement(By.xpath("//*[@id=\"staffid\"]")).sendKeys("001");
+            driver.findElement(By.xpath("//*[@id=\"staffname\"]")).sendKeys("Long");
+            driver.findElement(By.xpath("//*[@id=\"radio1\"]")).sendKeys("true");
+            driver.findElement(By.xpath("//*[@id=\"radio2\"]")).click();
+            driver.findElement(By.xpath("//*[@id=\"birthday\"]")).sendKeys("2000-02-01");
+            driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("longdev813@gmail.com");
+            driver.findElement(By.xpath("//*[@id=\"phone\"]")).sendKeys("123456789");
+            driver.findElement(By.xpath("//*[@id=\"salary\"]")).sendKeys("10000000");
+            driver.findElement(By.xpath("//*[@id=\"notes\"]")).sendKeys("note");
+            driver.findElement(By.xpath("//*[@id=\"departsByDepartid\"]")).sendKeys("IT");
+
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[@id=\"form\"]/div[4]/button[2]")).click();
+            driver.findElement(By.xpath("//*[@id=\"form\"]/div[10]/button[2]")).click();
             Thread.sleep(1000);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("user đã tồn tại")) {
+            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm thành công")) {
                 response.setActualResult("Thêm thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -154,68 +179,21 @@ public class TestUser {
         ExcelWriter.responseList.add(response);
         Assert.assertTrue(true);
     }
-    @Test(priority = 4)
-    public void testUpdate() {
 
-        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
-            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[1]/a")).click();
-        } else {
-            driver.navigate().refresh();
-        }
-        Response response = new Response()
-                .setName("Test User")
-                .setTestType("FUNC")
-                .setPriority("High")
-                .setId("User_Update_Test")
-                .setAction("Truy cập vào trang người dùng\n Nhấn nút update \n" +
-                        "update người dùng đã có trong database")
-                .setExpectedResult("update thành công")
-                .setActualResult("update thành công")
-                .setStatus(true)
-                .setTester("Long")
-                .setDate("07/08/2021");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[1]/td[3]/button")).click();
-            Thread.sleep(500);
-            driver.findElement(By.xpath("//*[@id=\"editFullName\"]")).sendKeys("update");
-            driver.findElement(By.xpath("//*[@id=\"editPassword\"]")).sendKeys("123456789");
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[@id=\"editUser\"]/div[4]/button[2]")).click();
-            Thread.sleep(1000);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Mã nhân viên không tồn tại!")) {
-                response.setActualResult("Update không thành công").setStatus(false);
-                ExcelWriter.responseList.add(response);
-                Assert.assertTrue(false);
-            }
-        } catch (InterruptedException e) {
-            System.out.println(e.toString());
-        } catch (Exception e) {
-            response.setActualResult("Thao tác không thành công").setStatus(false);
-            ExcelWriter.responseList.add(response);
-            Assert.assertTrue(false);
-        }
-        ExcelWriter.responseList.add(response);
-        Assert.assertTrue(true);
-    }
-    @Test(priority = 5)
+    @Test(priority = 4)
     public void testDelete() {
 
-        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
-            driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[1]/a")).click();
+        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/staff")) {
+            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[6]/td[9]/a")).click();
         } else {
             driver.navigate().refresh();
         }
         Response response = new Response()
-                .setName("Test User")
+                .setName("Test Staff")
                 .setTestType("FUNC")
                 .setPriority("High")
-                .setId("User_Delete_Test")
-                .setAction("Truy cập vào trang người dùng\n Nhấn nút delete \n" +
+                .setId("Staff_Delete_Test")
+                .setAction("Truy cập vào trang nhân viên\n Nhấn nút delete \n" +
                         "Xóa người dùng đã có trong database")
                 .setExpectedResult("Xóa thành công")
                 .setActualResult("Xóa thành công")
@@ -229,9 +207,9 @@ public class TestUser {
         }
         try {
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[2]/td[3]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[6]/td[9]/a")).click();
             Thread.sleep(50);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Nhân viên không tồn tại!")) {
+            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Xóa không thành công!")) {
                 response.setActualResult("Xóa không thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -241,9 +219,10 @@ public class TestUser {
         } catch (Exception e) {
             response.setActualResult("Thao tác không thành công").setStatus(false);
             ExcelWriter.responseList.add(response);
-            Assert.assertTrue(false);
+             Assert.assertTrue(false);
         }
         ExcelWriter.responseList.add(response);
         Assert.assertTrue(true);
     }
+
 }

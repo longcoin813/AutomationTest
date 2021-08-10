@@ -6,6 +6,7 @@
             <class name="com.java.demo"></class>
             <class name="com.java.TestLogin"></class>
             <class name="com.java.TestUser"></class>
+            <class name="com.java.TestStaff"></class>
 
         </classes>
     </test>
