@@ -2,16 +2,22 @@ package com.java;
 
 import helper.ExcelWriter;
 import model.Response;
+import model.User;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import service.UserService;
+
+import java.util.List;
+
 import static com.java.LoadBrowser.driver;
 
 public class TestUser {
 
     @Test(priority = 1)
     public void testInsert() {
-
         if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
             driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[1]/a")).click();
         } else {

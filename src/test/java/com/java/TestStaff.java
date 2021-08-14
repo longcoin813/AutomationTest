@@ -4,7 +4,6 @@ import helper.ExcelWriter;
 import model.Response;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.java.LoadBrowser.driver;
@@ -23,7 +22,7 @@ public class TestStaff {
                 .setTestType("FUNC")
                 .setPriority("High")
                 .setId("Staff_Insert_Test_1")
-                .setAction("Truy cập vào trang nhân viên\n Bấm thêm nhân viên \n Điền tất cả thông tin")
+                .setAction("Truy cập vào trang nhân viên\n Bấm thêm nhân viên \n Điền tất cả đúng tất cả thông tin")
                 .setExpectedResult("Thêm thành công")
                 .setActualResult("Thêm thành công")
                 .setStatus(true)
@@ -75,7 +74,7 @@ public class TestStaff {
             driver.navigate().refresh();
         }
         Response response = new Response()
-                .setName("Test User")
+                .setName("Test Staff")
                 .setTestType("FUNC")
                 .setPriority("High")
                 .setId("Staff_Insert_Test_2")
@@ -93,7 +92,7 @@ public class TestStaff {
         try {
             driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/button")).click();
             Thread.sleep(500);
-            driver.findElement(By.xpath("//*[@id=\"staffid\"]")).sendKeys("011");
+            driver.findElement(By.xpath("//*[@id=\"staffid\"]")).sendKeys("007");
             driver.findElement(By.xpath("//*[@id=\"staffname\"]")).sendKeys("Long");
             driver.findElement(By.xpath("//*[@id=\"radio1\"]")).sendKeys("true");
             driver.findElement(By.xpath("//*[@id=\"radio2\"]")).click();
@@ -131,7 +130,7 @@ public class TestStaff {
             driver.navigate().refresh();
         }
         Response response = new Response()
-                .setName("Test User")
+                .setName("Test Staff")
                 .setTestType("FUNC")
                 .setPriority("High")
                 .setId("Staff_Insert_Test_3")
@@ -184,7 +183,7 @@ public class TestStaff {
     public void testDelete() {
 
         if (!driver.getCurrentUrl().equals("http://localhost:8080/user/staff")) {
-            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[6]/td[9]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[7]/td[9]/a")).click();
         } else {
             driver.navigate().refresh();
         }
@@ -192,9 +191,9 @@ public class TestStaff {
                 .setName("Test Staff")
                 .setTestType("FUNC")
                 .setPriority("High")
-                .setId("Staff_Delete_Test")
+                .setId("Staff_Delete_Test_1")
                 .setAction("Truy cập vào trang nhân viên\n Nhấn nút delete \n" +
-                        "Xóa người dùng đã có trong database")
+                        "Xóa nhân viên chưa có thành tích ")
                 .setExpectedResult("Xóa thành công")
                 .setActualResult("Xóa thành công")
                 .setStatus(true)
@@ -224,5 +223,48 @@ public class TestStaff {
         ExcelWriter.responseList.add(response);
         Assert.assertTrue(true);
     }
+    @Test(priority = 5)
+    public void testDeleteHaveRecord() {
 
+        if (!driver.getCurrentUrl().equals("http://localhost:8080/user/staff")) {
+            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[2]/td[9]/a")).click();
+        } else {
+            driver.navigate().refresh();
+        }
+        Response response = new Response()
+                .setName("Test Staff")
+                .setTestType("FUNC")
+                .setPriority("High")
+                .setId("Staff_Delete_Test_2")
+                .setAction("Truy cập vào trang nhân viên\n Nhấn nút delete \n" +
+                        "Xóa nhân viên đã có thành tích")
+                .setExpectedResult("Xóa không thành công")
+                .setActualResult("Xóa thành công")
+                .setStatus(false)
+                .setTester("Long")
+                .setDate("07/08/2021");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[2]/td[9]/a")).click();
+            Thread.sleep(50);
+            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Xóa không thành công")) {
+                response.setActualResult("Xóa không thành công").setStatus(true);
+                ExcelWriter.responseList.add(response);
+                Assert.assertTrue(true);
+            }
+        } catch (InterruptedException e) {
+            System.out.println(e.toString());
+        } catch (Exception e) {
+            response.setActualResult("Thao tác không thành công").setStatus(false);
+            ExcelWriter.responseList.add(response);
+            Assert.assertTrue(false);
+        }
+        ExcelWriter.responseList.add(response);
+        Assert.assertTrue(true);
+    }
 }

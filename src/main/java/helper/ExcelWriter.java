@@ -33,8 +33,18 @@ public class ExcelWriter {
             //Write data on row
             writeBook(response, row);
             rowIndex++;
+            //Auto resize column witdth
+            int numberOfColumn = sheet.getRow(0).getPhysicalNumberOfCells();
+            autosizeColumn(sheet, numberOfColumn);
         }
         createOutputFile(workbook, path);
+
+    }
+
+    private static void autosizeColumn(Sheet sheet, int lastColumn) {
+        for (int columnIndex = 0; columnIndex < lastColumn; columnIndex++) {
+            sheet.autoSizeColumn(columnIndex);
+        }
     }
 
     //Create Workbook
@@ -84,4 +94,5 @@ public class ExcelWriter {
         OutputStream os = new FileOutputStream(excelFilePath);
         workbook.write(os);
     }
+
 }

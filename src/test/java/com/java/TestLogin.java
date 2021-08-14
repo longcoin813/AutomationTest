@@ -1,15 +1,23 @@
 package com.java;
 
 import helper.ExcelWriter;
+import model.Departs;
 import model.Response;
+import model.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import service.DepartService;
+import service.LoginService;
 
+
+import java.util.List;
 
 import static com.java.LoadBrowser.driver;
 
 public class TestLogin {
+
 
     @Test(priority = 1)
     public void testLogin() {
@@ -24,9 +32,7 @@ public class TestLogin {
                 .setStatus(true)
                 .setTester("Long")
                 .setDate("07/08/2021");
-        System.out.println("3");
         try {
-            System.out.println("4");
             driver.navigate().to("http://localhost:8080/signin");
             driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("admin");
             driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("123");
@@ -34,7 +40,6 @@ public class TestLogin {
             Thread.sleep(1000);
 
             if (!driver.getCurrentUrl().equals("http://localhost:8080/user/user")) {
-                System.out.println("1.1");
                 response.setActualResult("Không thành công");
                 response.setStatus(false);
                 ExcelWriter.responseList.add(response);
