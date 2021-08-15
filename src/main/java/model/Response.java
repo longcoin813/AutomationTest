@@ -14,8 +14,8 @@ import lombok.experimental.Accessors;
 @ToString
 public class Response {
     private String name;
-    private String testType;
     private String priority;
+    private String testType;
     private String id;
     private String action;
     private String expectedResult;

@@ -28,7 +28,7 @@ public class TestUser {
                 .setTestType("FUNC")
                 .setPriority("High")
                 .setId("User_Insert_Test_1")
-                .setAction("Truy cập vào trang người dùng\n")
+                .setAction("Truy cập vào trang người dùng\n"+"Bấm thêm người dùng, "+"Thêm người dùng chưa có trong database")
                 .setExpectedResult("Thêm thành công")
                 .setActualResult("Thêm thành công")
                 .setStatus(true)
@@ -48,7 +48,7 @@ public class TestUser {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"form\"]/div[4]/button[2]")).click();
             Thread.sleep(1000);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm không thành công")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm thành công")) {
                 response.setActualResult("Thêm không thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -96,7 +96,7 @@ public class TestUser {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"form\"]/div[4]/button[2]")).click();
             Thread.sleep(1000);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm thành công")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm thất bại")) {
                 response.setActualResult("Thêm thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -145,7 +145,7 @@ public class TestUser {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"form\"]/div[4]/button[2]")).click();
             Thread.sleep(1000);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("user đã tồn tại")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("user đã tồn tại!")) {
                 response.setActualResult("Thêm thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -193,7 +193,7 @@ public class TestUser {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"editUser\"]/div[4]/button[2]")).click();
             Thread.sleep(1000);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Mã nhân viên không tồn tại!")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Cập nhật thành công!")) {
                 response.setActualResult("Update không thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -237,7 +237,7 @@ public class TestUser {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[2]/td[3]/a")).click();
             Thread.sleep(50);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Nhân viên không tồn tại!")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Xóa thành công!")) {
                 response.setActualResult("Xóa không thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);

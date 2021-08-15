@@ -1,23 +1,13 @@
 package com.java;
 
 import helper.ExcelWriter;
-import model.Departs;
 import model.Response;
-import model.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import service.DepartService;
-import service.LoginService;
-
-
-import java.util.List;
-
 import static com.java.LoadBrowser.driver;
 
 public class TestLogin {
-
 
     @Test(priority = 1)
     public void testLogin() {
@@ -30,7 +20,7 @@ public class TestLogin {
                 .setExpectedResult("Login thành công")
                 .setActualResult("Login thành công")
                 .setStatus(true)
-                .setTester("Long")
+                .setTester("Thai")
                 .setDate("07/08/2021");
         try {
             driver.navigate().to("http://localhost:8080/signin");
@@ -71,7 +61,7 @@ public class TestLogin {
                 .setExpectedResult("Login không thành công và ở lại trang login")
                 .setActualResult("Login không thành công")
                 .setStatus(true)
-                .setTester("Long")
+                .setTester("Thai")
                 .setDate("07/08/2021");
         try {
             driver.navigate().to("http://localhost:8080/signin");
@@ -109,14 +99,14 @@ public class TestLogin {
                 .setExpectedResult("Login không thành công và ở lại trang login")
                 .setActualResult("Login không thành công")
                 .setStatus(true)
-                .setTester("Long")
+                .setTester("Thai")
                 .setDate("07/08/2021");
         try {
             driver.navigate().to("http://localhost:8080/signin");
             driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[1]")).sendKeys("admin");
             driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/input[2]")).sendKeys("");
             driver.findElement(By.xpath("//*[@id=\"content\"]/section/div/div[1]/div[1]/div/form/button")).click();
-            Thread.sleep(2000);
+            Thread.sleep(2000); 
 
             if (!driver.getCurrentUrl().equals("http://localhost:8080/signin")) {
                 response.setActualResult("Login thành công");
@@ -149,12 +139,11 @@ public class TestLogin {
                     .setExpectedResult("Title ='PM'")
                     .setActualResult("Title ='PM'")
                     .setStatus(true)
-                    .setTester("Long")
+                    .setTester("Thai")
                     .setDate("07/08/2021");
             ExcelWriter.responseList.add(response);
             Assert.assertTrue(true);
         } else {
-
             Response response = new Response()
                     .setName("Test Login")
                     .setTestType("FUNC")
@@ -164,8 +153,8 @@ public class TestLogin {
                     .setExpectedResult("Tile ='PM'")
                     .setActualResult("Title = '" + driver.getTitle() + "'")
                     .setStatus(false)
-                    .setTester("LongVT")
-                    .setDate("20/06/2020");
+                    .setTester("Thai")
+                    .setDate("07/08/2021");
             ExcelWriter.responseList.add(response);
             Assert.assertTrue(false);
         }

@@ -51,7 +51,7 @@ public class TestDepart {
                 Thread.sleep(500);
                 driver.findElement(By.xpath("//*[@id=\"form\"]/div[3]/button[2]")).click();
                 Thread.sleep(1000);
-                if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm không thành công")) {
+                if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm thành công")) {
                     response.setActualResult("Thêm không thành công").setStatus(false);
                     ExcelWriter.responseList.add(response);
                     Assert.assertTrue(false);
@@ -99,7 +99,7 @@ public class TestDepart {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"form\"]/div[3]/button[2]")).click();
             Thread.sleep(500);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Thêm thành công")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("ID đã tồn tại!")) {
                 response.setActualResult("Thêm thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -144,7 +144,7 @@ public class TestDepart {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"editDepart\"]/div[3]/button[2]")).click();
             Thread.sleep(500);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Cập nhật không thành công!\n")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Cập nhật thành công!")) {
                 response.setActualResult("Cập nhật không thành công!\n").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
@@ -180,8 +180,8 @@ public class TestDepart {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[1]/td[3]/a")).click();
             Thread.sleep(50);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Xóa thành công!")) {
-                response.setActualResult("Xóa  thành công").setStatus(false);
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("ID này đang được sử dụng")) {
+                response.setActualResult("Xóa thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
             }
@@ -213,7 +213,7 @@ public class TestDepart {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/table/tbody/tr[6]/td[3]/a")).click();
             Thread.sleep(50);
-            if (driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("ID này đang được sử dụng\n")) {
+            if (!driver.findElement(By.xpath("//*[@id=\"message_title\"]")).getText().equalsIgnoreCase("Xóa thành công!")) {
                 response.setActualResult("Xóa không thành công").setStatus(false);
                 ExcelWriter.responseList.add(response);
                 Assert.assertTrue(false);
